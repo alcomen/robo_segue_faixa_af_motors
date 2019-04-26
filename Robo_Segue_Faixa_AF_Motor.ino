@@ -59,6 +59,8 @@ void setup() {
 
 void loop() {
 
+  while(digitalRead(sensor_L) && digitalRead(sensor_R)) parar();
+  
   if(digitalRead(sensor_L))
   {
     esquerda();
@@ -67,28 +69,4 @@ void loop() {
   {
     direita();
   }else frente();
-
-  delay(50);
-
-  if(Serial.available() > 0)
-  {
-    char dado;
-
-    dado = Serial.read();
-
-    switch(dado)
-    {
-      case 'F' :  motor4.run(FORWARD);
-                  motor1.run(FORWARD);
-                  break;
-
-      case 'B' :  motor4.run(BACKWARD);
-                  motor1.run(BACKWARD);
-                  break;
-
-      case 'S' :  motor4.run(RELEASE);
-                  motor1.run(RELEASE);
-                  break;
-    }
-  }
 }
